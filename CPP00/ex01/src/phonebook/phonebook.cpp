@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:12:55 by gabrsouz          #+#    #+#             */
-/*   Updated: 2025/11/17 16:42:43 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2025/12/04 14:39:05 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ const Contact& Phonebook::getContact(int index) const {
 }
 
 void Phonebook::addContact(const Contact& contact) {
+	if (contact.getFirstName().empty() || contact.getLastName().empty() || \
+		contact.getNickname().empty() || contact.getPhoneNumber().empty() || \
+		contact.getDarkestSecret().empty()) {
+		std::cout << "Please, fill all the fields to add a contact to your phonebook!" << std::endl;
+		return ;
+	} else {
+	std::cout << contact.getFirstName() << " " << contact.getLastName()
+	 << " has been added to your phonebook!" << std::endl;
 	contacts[getN_Contacts() % getMaxContacts()] = contact;
-	setN_Contacts(getN_Contacts() + 1); 
+	setN_Contacts(getN_Contacts() + 1);
+	}
+	return ;
 }

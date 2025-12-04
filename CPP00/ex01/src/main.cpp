@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 17:47:20 by gabrsouz          #+#    #+#             */
-/*   Updated: 2025/12/04 14:18:35 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2025/12/04 14:44:25 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ Contact create_contact(Contact& new_contact)
 	std::getline(std::cin, input);
 	new_contact.setDarkestSecret(input);
 	std::cout << "\n";
-	std::cout << new_contact.getFirstName() << " " << new_contact.getLastName()
-	 << " has been added to your phonebook!" << std::endl;
-	 std::cout << "\n";
 	return (new_contact);
 }
 
@@ -126,15 +123,10 @@ int main(void)
 			std::cout << "ENTER THE INDEX OF THE CONTACT YOU WANT TO VIEW: " << std::endl;
 			std::getline(std::cin, input);
 			int index = std::atoi(input.c_str());
-			if (index < 0 || index > 7)
+			if (index > (phonebook.getN_Contacts() - 1) || index < 0 || index > 7)
 				std::cout << "INDEX OUT OF RANGE, PLEASE, ENTER A VALID INDEX" << std::endl;
-			else {
-				if (index - 1 > phonebook.getN_Contacts()) {
-					std::cout << phonebook.getN_Contacts() << std::endl;
-					std::cout << "INDEX OUT OF RANGE, PLEASE, ENTER A VALID INDEX" << std::endl;
-				} else 
-					display_infos_contact(phonebook.getContact(index));
-			}
+			else
+				display_infos_contact(phonebook.getContact(index));
 		}
 		else
 			std::cout << "\n\t INVALID ENTRY!" << std::endl;
