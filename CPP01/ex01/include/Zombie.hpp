@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 11:41:31 by gabrsouz          #+#    #+#             */
-/*   Updated: 2025/11/18 16:29:40 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:07:11 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 class Zombie {
 private:
 	std::string name;
+	int	n;
 
 public:
 	Zombie(std::string n) : name(n) {
