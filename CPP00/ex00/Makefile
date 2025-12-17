@@ -17,13 +17,11 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	@echo "$(GREEN)Executable created: $(NAME)$(RESET)"
+	@echo "To run this program, use ./megaphone fallowed by the sentece you would like to put through the megaphone."
 
 obj/%.o: src/%.cpp
 	@mkdir -p $(dir $@)
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
-
-valgrind: $(NAME)
-	valgrind --leak-check=full ./$(NAME)
 
 clean:
 	@$(RM) $(OBJS)

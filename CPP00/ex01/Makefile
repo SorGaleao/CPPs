@@ -23,7 +23,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(CXX) $(CXXFLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
 	@echo "$(GREEN)Executable created: $(NAME)$(RESET)"
-
+	@echo "To run this program, use ./phonebook."
 
 obj/%.o: src/%.cpp
 	@mkdir -p $(dir $@)

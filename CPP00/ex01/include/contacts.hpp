@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 17:42:59 by gabrsouz          #+#    #+#             */
-/*   Updated: 2025/11/17 16:34:46 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2025/12/09 13:47:29 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <iostream>
 #include <string>
 
-class Contact 
+class Contact
 {
 	private:
 	std::string FirstName;
@@ -24,8 +24,8 @@ class Contact
 	std::string Nickname;
 	std::string PhoneNumber;
 	std::string DarkestSecret;
+	
 	public:
-
 	//SETTERS
 	void setFirstName(std::string value);
 	void setLastName(std::string value);
@@ -40,7 +40,6 @@ class Contact
 	std::string getPhoneNumber(void) const;
 	std::string getDarkestSecret(void) const;
     
-	
 };
 
 #endif
