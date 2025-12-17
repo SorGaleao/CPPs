@@ -12,6 +12,21 @@
 
 #include "Zombie.hpp"
 
+Zombie::Zombie() : name("") {}
+
+Zombie::Zombie(std::string n) : name(n) {
+	std::cout << name << " was created" << std::endl;
+}
+
+Zombie::~Zombie() {
+	if (!name.empty())
+		std::cout << name << " was destroyed" << std::endl;
+}
+
+void Zombie::setName(std::string n) {
+	name = n;
+}
+
 std::string Zombie::getZombieName() const { 
     return (name);
 }

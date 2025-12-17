@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   HumanB.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 11:41:31 by gabrsouz          #+#    #+#             */
-/*   Updated: 2025/12/17 12:49:23 by gabrsouz         ###   ########.fr       */
+/*   Created: 2025/12/17 16:59:08 by gabrsouz          #+#    #+#             */
+/*   Updated: 2025/12/17 17:55:12 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#ifndef HUMANB_HPP
+# define HUMANB_HPP
 
 #include <string>
 #include <iostream>
+#include "../include/Weapon.hpp"
 
-class Zombie {
+class HumanB {
 private:
-	std::string name;
-
+	const std::string name;
+	Weapon *weapon;
 public:
-	Zombie();
-	Zombie(std::string n);
-	~Zombie();
-
-	void setName(std::string n);
-	std::string getZombieName() const;
-	void announce();
+	HumanB(const std::string &name);
+	~HumanB();
+	void setWeapon(Weapon &new_weapon);
+	void attack();
 };
-
-Zombie* newZombie(std::string name);
-void randomChump(std::string name);
-Zombie* zombieHorde(int N, std::string name);
 
 #endif

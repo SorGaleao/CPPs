@@ -5,34 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 12:56:31 by gabrsouz          #+#    #+#             */
-/*   Updated: 2025/11/18 16:29:13 by gabrsouz         ###   ########.fr       */
+/*   Created: 2025/12/17 17:01:58 by gabrsouz          #+#    #+#             */
+/*   Updated: 2025/12/17 17:55:36 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
-#include <cstdlib>
+#include "../include/HumanA.hpp"
+#include "../include/HumanB.hpp"
 
-int main(int argc, char **argv) {
-	if (argc != 3 || !argv[1] || !argv[2])
-		return (1);
-	int n = atoi(argv[1]);
-	if (n <= 0)
-		return (1);
-	std::string name = argv[2];
-	
-	std::cout << "Creating a horde of " << n << " zombies named " << name << std::endl;
-	
-	// Create zombie horde (single allocation)
-	Zombie* horde = zombieHorde(n, name);
-	
-	// Call announce() for each zombie
-	for (int i = 0; i < n; i++) {
-		horde[i].announce();
+int main() {
+	{
+	Weapon club = Weapon("crude spiked club");
+	HumanA bob("Bob", club);
+	bob.attack();
+	club.setType("some other type of club");
+	bob.attack();
 	}
-	
-	// Deallocate the entire horde (must use delete[], not delete)
-	delete[] horde;
-	
+	{
+	Weapon club = Weapon("crude spiked club");
+	HumanB jim("Jim");
+	jim.setWeapon(club);
+	jim.attack();
+	club.setType("some other type of club");
+	jim.attack();
+	}
 	return 0;
 }
