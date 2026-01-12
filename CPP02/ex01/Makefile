@@ -1,11 +1,11 @@
-NAME = harlFilter
+NAME = fixed
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 INCLUDES = -I include
 RM = rm -f
 
 SRC = src/main.cpp \
-	src/Harl.cpp
+	src/Fixed.cpp
 OBJ = $(SRC:src/%.cpp=obj/%.o)
 
 GREEN		= \033[0;32m
@@ -18,7 +18,7 @@ all: $(NAME)
 $(NAME) : $(OBJ)
 	@$(CXX) $(CXXFLAGS) $(INCLUDES) $(OBJ) -o $(NAME)
 	@echo "$(GREEN)Executable created: $(NAME)$(RESET)"
-	@echo "$(GRay)Usage: $(RESET)./harlFilter LEVEL"
+	@echo "$(GRAY)Usage: $(RESET)./fixed"
 
 obj/%.o: src/%.cpp
 	@mkdir -p $(dir $@)
