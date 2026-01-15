@@ -6,14 +6,13 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 11:14:52 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/01/15 14:36:55 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/01/15 15:45:12 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ScavTrap.hpp"
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
-	this->name = name;
+ScavTrap::ScavTrap(std::string nameScav) : ClapTrap(nameScav) {
 	this->hitPoints = 100;
 	this->energyPoints = 50;
 	this-> attackDamage = 20;
@@ -21,16 +20,16 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
 }
 
 ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other) {
-	std::cout << "Copy assignment called" << std::endl;
+	std::cout << "Copy ScavTrap assignment called" << std::endl;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
-	std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << "Copy ScavTrap assignment operator called" << std::endl;
 	if (this != &other)
 		ClapTrap::operator=(other);
 	return (*this);
 }
-	
+
 ScavTrap::~ScavTrap() {
 	std::cout << "ScavTrap " << name << " was destroyed." << std::endl;
 }

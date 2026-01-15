@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 11:14:52 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/01/15 14:36:55 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:37:22 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
 		ClapTrap::operator=(other);
 	return (*this);
 }
-	
+
 ScavTrap::~ScavTrap() {
 	std::cout << "ScavTrap " << name << " was destroyed." << std::endl;
 }

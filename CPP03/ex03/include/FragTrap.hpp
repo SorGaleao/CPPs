@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Harl.hpp                                           :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/12 12:10:18 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/01/12 14:50:10 by gabrsouz         ###   ########.fr       */
+/*   Created: 2026/01/15 12:20:30 by gabrsouz          #+#    #+#             */
+/*   Updated: 2026/01/15 14:52:10 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HARL_CPP
-# define HARL_CPP
+#include "ClapTrap.hpp"
 
-#include <string>
-#include <iostream>
-
-class Harl {
-private:
-	void debug(void);
-	void info(void);
-	void warning(void);
-	void error(void);
-	
+class FragTrap : virtual public ClapTrap {
 public:
-	void complain(std::string level);
+	FragTrap(std::string name);
+	FragTrap(const FragTrap& other);
+	FragTrap& operator=(const FragTrap &other);
+	~FragTrap();
+	void highFivesGuys(void);
 };
-
-#endif
