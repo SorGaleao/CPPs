@@ -1,11 +1,13 @@
-NAME = fixed
+NAME = scavTrap
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 INCLUDES = -I include
 RM = rm -f
 
 SRC = src/main.cpp \
-	src/Fixed.cpp
+	src/ClapTrap.cpp \
+	src/ScavTrap.cpp
+
 OBJ = $(SRC:src/%.cpp=obj/%.o)
 
 GREEN		= \033[0;32m
@@ -18,7 +20,7 @@ all: $(NAME)
 $(NAME) : $(OBJ)
 	@$(CXX) $(CXXFLAGS) $(INCLUDES) $(OBJ) -o $(NAME)
 	@echo "$(GREEN)Executable created: $(NAME)$(RESET)"
-	@echo "$(GRAY)Usage: $(RESET)./fixed"
+	@echo "$(GRAY)Usage: $(RESET)./scavTrap"
 
 obj/%.o: src/%.cpp
 	@mkdir -p $(dir $@)
