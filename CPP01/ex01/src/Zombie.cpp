@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zombie.cpp                                         :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 11:42:52 by gabrsouz          #+#    #+#             */
-/*   Updated: 2025/11/18 16:28:45 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/01/15 17:38:44 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 Zombie::Zombie() : name("") {}
 
-Zombie::Zombie(std::string n) : name(n) {
-	std::cout << name << " was created" << std::endl;
-}
+Zombie::Zombie(std::string n) : name(n) {}
 
 Zombie::~Zombie() {
 	if (!name.empty())

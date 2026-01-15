@@ -9,7 +9,7 @@ SRC = main.cpp
 OBJ = $(SRC:%.cpp=obj/%.o)
 
 GREEN		= \033[0;32m
-GREY		= \033[0;90m
+GRAY		= \033[0;90m
 RED			= \033[0;31m
 RESET		= \033[0m
 
@@ -17,7 +17,8 @@ all: $(NAME)
 
 $(NAME) : $(OBJ)
 	@$(CXX) $(CXXFLAGS) $(INCLUDES) $(OBJ) -o $(NAME)
-	@echo "$(GREEN)Executable created: $(NAME)$(RESET)"	
+	@echo "$(GREEN)Executable created: $(NAME)$(RESET)"
+	@echo "$(GRAY)Usage: $(RESET)./brain"
 
 obj/%.o: %.cpp
 	@mkdir -p $(dir $@)

@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:59:05 by gabrsouz          #+#    #+#             */
-/*   Updated: 2025/12/17 17:53:22 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/01/15 17:50:22 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <string>
 #include <iostream>
+
 class Weapon {
 private:
 	std::string type;
@@ -22,7 +23,7 @@ private:
 public:
 	Weapon(std::string type);
 	~Weapon();
-	const std::string &getType() const;
+	const std::string& getType() const;
 	void setType(const std::string &waeponType);
 };
 

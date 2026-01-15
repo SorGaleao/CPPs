@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 12:56:31 by gabrsouz          #+#    #+#             */
-/*   Updated: 2025/11/18 16:29:13 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/01/15 17:32:53 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,10 @@ int main(int argc, char **argv) {
 	if (n <= 0)
 		return (1);
 	std::string name = argv[2];
-	
-	std::cout << "Creating a horde of " << n << " zombies named " << name << std::endl;
-	
-	// Create zombie horde (single allocation)
 	Zombie* horde = zombieHorde(n, name);
-	
-	// Call announce() for each zombie
 	for (int i = 0; i < n; i++) {
 		horde[i].announce();
 	}
-	
-	// Deallocate the entire horde (must use delete[], not delete)
 	delete[] horde;
 	
 	return 0;

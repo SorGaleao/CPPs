@@ -1,17 +1,17 @@
-NAME = zombie
+NAME = zombieHorde
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 INCLUDES = -I include
 RM = rm -f
 
 SRC = src/main.cpp \
-	src/zombie.cpp \
+	src/Zombie.cpp \
 	src/zombieHorde.cpp
 
 OBJ = $(SRC:src/%.cpp=obj/%.o)
 
 GREEN		= \033[0;32m
-GREY		= \033[0;90m
+GRAY		= \033[0;90m
 RED			= \033[0;31m
 RESET		= \033[0m
 
@@ -19,7 +19,8 @@ all: $(NAME)
 
 $(NAME) : $(OBJ)
 	@$(CXX) $(CXXFLAGS) $(INCLUDES) $(OBJ) -o $(NAME)
-	@echo "$(GREEN)Executable created: $(NAME)$(RESET)"	
+	@echo "$(GREEN)Executable created: $(NAME)$(RESET)"
+	@echo "$(GRAY)Usage: $(RESET)./zombieHorde <horde number> <name>"
 
 obj/%.o: src/%.cpp
 	@mkdir -p $(dir $@)

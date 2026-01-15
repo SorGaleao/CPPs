@@ -18,7 +18,7 @@ all: $(NAME)
 $(NAME) : $(OBJ)
 	@$(CXX) $(CXXFLAGS) $(INCLUDES) $(OBJ) -o $(NAME)
 	@echo "$(GREEN)Executable created: $(NAME)$(RESET)"
-	@echo "$(GRay)Usage: $(RESET)./harlFilter LEVEL"
+	@echo "$(GRAY)Usage: $(RESET)./harlFilter <level>"
 
 obj/%.o: src/%.cpp
 	@mkdir -p $(dir $@)

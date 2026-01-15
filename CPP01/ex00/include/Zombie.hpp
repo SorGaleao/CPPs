@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 11:41:31 by gabrsouz          #+#    #+#             */
-/*   Updated: 2025/11/18 15:05:10 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/01/15 17:16:52 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,8 @@ private:
 	std::string name;
 
 public:
-	Zombie(std::string n) : name(n) {
-		std::cout << name << " was created" << std::endl;
-	}
-	~Zombie() {
-		std::cout << name << " was destroied" << std::endl;
-	}
-
+	Zombie(std::string n);
+	~Zombie();
 	std::string getZombieName() const;
 	void announce();
 };
