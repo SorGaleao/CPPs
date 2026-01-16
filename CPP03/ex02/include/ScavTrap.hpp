@@ -6,9 +6,12 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 11:13:08 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/01/15 14:37:46 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:44:57 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef SCAVTRAP_HPP
+#define SCAVTRAP_HPP
 
 #include "ClapTrap.hpp"
 
@@ -21,3 +24,5 @@ public:
 	void attack(const std::string& target);
 	void guardGate();
 };
+
+#endif

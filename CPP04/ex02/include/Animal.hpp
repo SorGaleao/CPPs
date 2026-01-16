@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:22:25 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/01/16 10:56:28 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/01/16 11:41:08 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ protected:
 
 public:
 	Animal();
+	Animal(const Animal& other);
+	Animal& operator=(const Animal &other);
 	Animal(std::string type);
 	virtual ~Animal();
 

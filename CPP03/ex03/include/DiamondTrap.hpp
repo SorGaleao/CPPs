@@ -6,9 +6,12 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 14:02:08 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/01/15 16:04:41 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:45:02 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef DIAMONDTRAP_HPP
+#define DIAMONDTRAP_HPP
 
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
@@ -23,3 +26,5 @@ public:
 	~DiamondTrap();
 	void whoAmI();
 };
+
+#endif

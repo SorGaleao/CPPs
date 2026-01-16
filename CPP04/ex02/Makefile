@@ -5,9 +5,13 @@ INCLUDES = -I include
 RM = rm -f
 
 SRC = src/main.cpp \
-	src/Animal.cpp \
+	src/AAnimal.cpp \
 	src/Cat.cpp \
-	src/Dog.cpp
+	src/Dog.cpp \
+	src/Brain.cpp \
+	src/WrongAnimal.cpp \
+	src/WrongCat.cpp \
+	src/WrongDog.cpp
 
 OBJ = $(SRC:src/%.cpp=obj/%.o)
 

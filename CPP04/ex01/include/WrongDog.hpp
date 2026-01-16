@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongDog.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/16 10:22:25 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/01/16 10:56:28 by gabrsouz         ###   ########.fr       */
+/*   Created: 2026/01/16 13:14:33 by gabrsouz          #+#    #+#             */
+/*   Updated: 2026/01/16 13:15:38 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef WRONGDOG_HPP
+# define WRONGDOG_HPP
 
-#include <string>
-#include <iostream>
+#include "WrongAnimal.hpp"
 
-class Animal {
-protected:
-	std::string type;
-
+class WrongDog : public WrongAnimal {
 public:
-	Animal();
-	Animal(std::string type);
-	virtual ~Animal();
-
-	std::string getType() const;
-	virtual void makeSound() const;
+	WrongDog();
+	WrongDog(const WrongDog& other);
+	WrongDog& operator=(const WrongDog &other);
+	~WrongDog();
+	void makeSound() const;
 };
 
 #endif

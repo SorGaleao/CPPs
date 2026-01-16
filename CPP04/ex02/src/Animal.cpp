@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:21:22 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/01/16 10:56:12 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/01/16 12:56:28 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 
 Animal::Animal() {
 	std::cout << "Animal was created" << std::endl;
+}
+
+Animal::Animal(const Animal& other) : type(other.type) {
+	std::cout << "Animal copy was created" << std::endl;
+}
+
+Animal& Animal::operator=(const Animal &other) {
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &other)
+		this->type = other.type;
+	return (*this);
 }
 
 Animal::Animal(std::string type) : type(type) {
@@ -28,5 +39,5 @@ std::string Animal::getType() const {
 }
 
 void Animal::makeSound() const {
-	std::cout << "Random animal sound" << std::endl;
+	std::cout << "silence" << std::endl;
 }
