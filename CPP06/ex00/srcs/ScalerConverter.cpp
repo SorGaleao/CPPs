@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 16:14:35 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/02/10 17:19:25 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/02/10 17:21:38 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ bool ScalarConverter::isFloat(const std::string &str) {
 ScalarConverter::type ScalarConverter::detect_type(const std::string &str, double &value, bool &is_pseudo) {
 	bool pseudo_float = false;
 	if (str.empty())
-		return false;
+		return ScalarConverter::UNKWON;
 	if (is_pseudo_literal(str, pseudo_float, value)) {
 		is_pseudo = true;
 		return (pseudo_float) ? ScalarConverter::FLOAT : ScalarConverter::DOUBLE;

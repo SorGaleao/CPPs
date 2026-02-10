@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 16:14:32 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/02/10 17:18:29 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/02/10 17:21:51 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ class ScalarConverter {
 		CHAR,
 		INT,
 		FLOAT,
-		DOUBLE
+		DOUBLE,
+		UNKWON
 	};
 
 	static bool isChar(const std::string &str);
