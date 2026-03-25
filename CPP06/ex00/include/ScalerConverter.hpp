@@ -25,28 +25,20 @@
 #include <sstream>
 
 class ScalarConverter {
-	private:
+private:
 	ScalarConverter();
 	ScalarConverter(const ScalarConverter& other);
 	ScalarConverter& operator=(const ScalarConverter &other);
-	~ScalarConverter();
-	
-	enum type {
-		CHAR,
-		INT,
-		FLOAT,
-		DOUBLE,
-		UNKWON
-	};
 
-	static bool isChar(const std::string &str);
-	static bool isInt(const std::string &str);
-	static bool isDouble(const std::string &str);
-	static bool isFloat(const std::string &str);
-	static type detect_type(const std::string &str, double &value, bool &is_pseudo);
-	
-	public:
-		static void convert(std::string& str);
+	static bool isChar(const std::string &str, double &value);
+	static bool isInt(const std::string &str, double &value);
+	static bool isDouble(const std::string &str, double &value);
+	static bool isFloat(const std::string &str, double &value);
+	static void print(double value, std::size_t precision = 1);
+	static void print_imp(const std::string &num);
+
+public:
+	static void convert(const std::string &str);
 };
 
 #endif

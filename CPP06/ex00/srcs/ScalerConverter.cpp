@@ -12,88 +12,183 @@
 
 #include "../include/ScalerConverter.hpp"
 
-ScalarConverter::ScalarConverter() {}
+#include <cmath>
+#include <limits>
+#include <iomanip>
 
-ScalarConverter::ScalarConverter(const ScalarConverter& other) {}
-
-ScalarConverter& ScalarConverter::operator=(const ScalarConverter &other) {
-	(void)other;
-	return (*this);
+// Helper: check printable
+static bool is_printable(int c) {
+    return std::isprint(static_cast<unsigned char>(c));
 }
 
-ScalarConverter::~ScalarConverter() {}
-
-bool ScalarConverter::isChar(const std::string &str) {
-	if (str.size() == 1 && !std::isdigit(static_cast<unsigned char>(str[0])))
-		return true;
-	if (str.size() == 3 && str[0] == '\'' && str[2] == '\'') 
-		return true;
-	return false;
+bool ScalarConverter::isChar(const std::string &str, double &value) {
+    if (str.size() == 1 && !std::isdigit(static_cast<unsigned char>(str[0]))) {
+        char c = str[0];
+        value = static_cast<double>(static_cast<unsigned char>(c));
+        return true;
+    }
+    if (str.size() == 3 && str[0] == '\'' && str[2] == '\'') {
+        char c = str[1];
+        value = static_cast<double>(static_cast<unsigned char>(c));
+        return true;
+    }
+    return false;
 }
 
-bool ScalarConverter::isInt(const std::string &str) {
-	std::size_t i = 0;
-	if (str[i] == '+' || str[i] == '-')
-		++i;
-	if (i >= str.size())
-		return false;
-	for (; i < str.size(); ++i) {
-		if (!std::isdigit(static_cast<unsigned char>(str[i])))
-			return false;
-	}
-	return true;
-}
-
-bool ScalarConverter::isDouble(const std::string &str) {
-    std::size_t i = 0;
-    if (str.empty()) return false;
-    if (str[i] == '+' || str[i] == '-') ++i;
-
-    bool has_dot = false;
-    bool has_digit_before = false;
-    bool has_digit_after = false;
-
-    for (; i < str.size(); ++i) {
-        unsigned char c = static_cast<unsigned char>(str[i]);
-        if (std::isdigit(c)) {
-            if (!has_dot) has_digit_before = true;
-            else has_digit_after = true;
-        } else if (c == '.' && !has_dot) {
-            has_dot = true;
-        } else {
+bool ScalarConverter::isInt(const std::string &str, double &value) {
+    if (str.empty())
+        return false;
+    std::size_t pos = 0;
+    if (str[pos] == '+' || str[pos] == '-') {
+        ++pos;
+        if (pos >= str.size())
             return false;
+    }
+    for (std::size_t i = pos; i < str.size(); ++i) {
+        if (!std::isdigit(static_cast<unsigned char>(str[i])))
+            return false;
+    }
+    errno = 0;
+    char *endptr = NULL;
+    long long v = std::strtoll(str.c_str(), &endptr, 10);
+    if (errno == ERANGE)
+        return false;
+    if (endptr == NULL || *endptr != '\0')
+        return false;
+    value = static_cast<double>(v);
+    return true;
+}
+
+bool ScalarConverter::isDouble(const std::string &str, double &value) {
+    std::size_t dot = str.find('.');
+    if (dot == std::string::npos)
+        return false;
+    std::string before = str.substr(0, dot);
+    std::string after = str.substr(dot + 1);
+    if (after.empty())
+        return false;
+    for (std::size_t i = 0; i < after.size(); ++i) {
+        if (!std::isdigit(static_cast<unsigned char>(after[i])))
+            return false;
+    }
+    // parse integer part without changing global state: use strtoll on `before`
+    long long intpart = 0;
+    if (before.empty())
+        intpart = 0;
+    else {
+        errno = 0;
+        char *endptr = NULL;
+        intpart = std::strtoll(before.c_str(), &endptr, 10);
+        if (errno == ERANGE) return false;
+        if (endptr == NULL || *endptr != '\0') return false;
+    }
+    std::string frac = std::string("0.") + after;
+    errno = 0;
+    char *endptr2 = NULL;
+    double f = std::strtod(frac.c_str(), &endptr2);
+    if (errno == ERANGE || endptr2 == NULL || *endptr2 != '\0')
+        return false;
+    // apply sign from before (if it starts with '-')
+    if (!before.empty() && before[0] == '-')
+        value = static_cast<double>(intpart) - f;
+    else
+        value = static_cast<double>(intpart) + f;
+    return true;
+}
+
+bool ScalarConverter::isFloat(const std::string &str, double &value) {
+    if (str.size() < 2 || str[str.size() - 1] != 'f') {
+        return false;
+    }
+    std::string core = str.substr(0, str.size() - 1);
+    return isDouble(core, value);
+}
+
+void ScalarConverter::print_imp(const std::string &num) {
+    std::cout << "char: impossible"<< std::endl;
+    std::cout << "int: impossible" << std::endl;
+    std::cout << "float: " << num << "f" << std::endl;
+    std::cout << "double: " << num << std::endl;
+}
+
+void ScalarConverter::print(double num, std::size_t precision) {
+    // char
+    if (std::isnan(num) || std::isinf(num)) {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+    } else {
+        long long vi = static_cast<long long>(num);
+        if (vi < std::numeric_limits<int>::min() || vi > std::numeric_limits<int>::max()) {
+            std::cout << "char: impossible" << std::endl;
+            std::cout << "int: impossible" << std::endl;
+        } else {
+            int i = static_cast<int>(vi);
+            if (i < 0 || i > 127) {
+                std::cout << "char: impossible" << std::endl;
+            } else if (!is_printable(i)) {
+                std::cout << "char: Non displayable" << std::endl;
+            } else {
+                std::cout << "char: '" << static_cast<char>(i) << "'" << std::endl;
+            }
+            std::cout << "int: " << i << std::endl;
         }
     }
-    return has_dot && has_digit_before && has_digit_after;
+    // float and double formatting
+    std::cout << std::fixed << std::setprecision(static_cast<int>(precision));
+    float f = static_cast<float>(num);
+    std::cout << "float: " << f << "f" << std::endl;
+    std::cout << "double: " << static_cast<double>(num) << std::endl;
 }
 
-bool ScalarConverter::isFloat(const std::string &str) {
-	if (str.size() < 2 || str[str.size() - 1] != 'f') {
-		return false;
-	}
-	std::string core = str.substr(0, str.size() - 1);
-	return isDouble(core);
-}
+void ScalarConverter::convert(const std::string &str) {
+    double value = 0.0;
+    std::size_t precision = 1;
+    // pseudo-literals: nan/nanf, +inf/-inf/+inff/-inff
+    if (str == "nan" || str == "nanf") {
+        print_imp("nan");
+        return;
+    }
+    if (str == "inf" || str == "+inf" || str == "-inf" ||
+        str == "inff" || str == "+inff" || str == "-inff") {
+        std::string norm = str;
+        if (!norm.empty() && norm[norm.size() - 1] == 'f') norm.erase(norm.size() - 1, 1);
+        print_imp(norm);
+        return;
+    }
 
-ScalarConverter::type ScalarConverter::detect_type(const std::string &str, double &value, bool &is_pseudo) {
-	bool pseudo_float = false;
-	if (str.empty())
-		return ScalarConverter::UNKWON;
-	if (is_pseudo_literal(str, pseudo_float, value)) {
-		is_pseudo = true;
-		return (pseudo_float) ? ScalarConverter::FLOAT : ScalarConverter::DOUBLE;
-	}
-	if (isChar(str))
-		return ScalarConverter::CHAR;
-	if (isInt(str))
-		return ScalarConverter::INT;
-	if (isFloat(str))
-		return ScalarConverter::FLOAT;
-	if (isDouble(str))
-		return ScalarConverter::DOUBLE;
-	return ScalarConverter::DOUBLE;
-}
+    // order: char, int, float, double
+    if (isChar(str, value)) {
+        precision = 1;
+        print(value, precision);
+        return;
+    }
+    if (isInt(str, value)) {
+        precision = 1;
+        print(value, precision);
+        return;
+    }
+    // float (with trailing f)
+    if (isFloat(str, value)) {
+        // compute fractional digits from core
+        std::string core = str.substr(0, str.size() - 1);
+        std::size_t dot = core.find('.');
+        if (dot != std::string::npos) {
+            std::string after = core.substr(dot + 1);
+            precision = after.size() > 0 ? after.size() : 1;
+        }
+        print(value, precision);
+        return;
+    }
+    // double
+    if (isDouble(str, value)) {
+        std::size_t dot = str.find('.');
+        if (dot != std::string::npos) {
+            std::string after = str.substr(dot + 1);
+            precision = after.size() > 0 ? after.size() : 1;
+        }
+        print(value, precision);
+        return;
+    }
 
-void ScalarConverter::convert(std::string& str) {
-	
+    std::cerr << "Unknown input" << std::endl;
 }
