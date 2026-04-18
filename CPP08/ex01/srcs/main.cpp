@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,27 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITER_HPP
-# define ITER_HPP
-
+#include "../include/Span.hpp"
 #include <iostream>
-#include <string>
-#include <cstddef>
+#include <vector>
+#include <cstdlib>
 
-template <typename T, typename F>
-void iter(T *array, std::size_t size, F func) {
-    if (!array)
-        return;
-    for (std::size_t i = 0; i < size; ++i)
-        func(array[i]);
+int main()
+{
+    Span sp = Span(5);
+
+    sp.addNumber(6);
+    sp.addNumber(3);
+    sp.addNumber(17);
+    sp.addNumber(9);
+    sp.addNumber(11);
+
+    std::cout << sp.shortestSpan() << std::endl;
+    std::cout << sp.longestSpan() << std::endl;
+    
+    return 0;
 }
-
-template <typename T, typename F>
-void iter(T const *array, std::size_t size, F func) {
-    if (!array)
-        return;
-    for (std::size_t i = 0; i < size; ++i)
-        func(array[i]);
-}
-
-#endif

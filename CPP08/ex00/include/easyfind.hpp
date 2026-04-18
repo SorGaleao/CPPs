@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                                         :+:      :+:    :+:   */
+/*   easyfind.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,27 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITER_HPP
-# define ITER_HPP
+#ifndef EASYFIND_H
+#define EASYFIND_H
 
-#include <iostream>
-#include <string>
-#include <cstddef>
+#include <algorithm>
+#include <stdexcept>
 
-template <typename T, typename F>
-void iter(T *array, std::size_t size, F func) {
-    if (!array)
-        return;
-    for (std::size_t i = 0; i < size; ++i)
-        func(array[i]);
+template <typename T>
+typename T::iterator easyfind(T &container, int to_find) {
+	typename T::iterator i = std::find(container.begin(), container.end(), to_find);
+	if (i == container.end())
+		throw std::runtime_error("value not found");
+	return i;
 }
 
-template <typename T, typename F>
-void iter(T const *array, std::size_t size, F func) {
-    if (!array)
-        return;
-    for (std::size_t i = 0; i < size; ++i)
-        func(array[i]);
+template <typename T>
+typename T::const_iterator easyfind(const T &container, int to_find) {
+	typename T::const_iterator i = std::find(container.begin(), container.end(), to_find);
+	if (i == container.end())
+		throw std::runtime_error("value not found");
+	return i;
 }
+
 
 #endif

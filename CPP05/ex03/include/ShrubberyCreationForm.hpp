@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHRUBBERYCREATIONFORM_H
-# define SHRUBBERYCREATIONFORM_H
+#ifndef SHRUBBERYCREATIONFORM_HPP
+# define SHRUBBERYCREATIONFORM_HPP
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"

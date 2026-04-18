@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALORCONVERTER_H
-#define SCALORCONVERTER_H
+#ifndef SCALORCONVERTER_HPP
+#define SCALORCONVERTER_HPP
 
 #include <string>
 #include <iostream>
