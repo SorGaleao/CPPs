@@ -1,11 +1,11 @@
-NAME = scalerConverter
+NAME = whatever
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 INCLUDES = -I include
 RM = rm -f
 
 SRC = srcs/main.cpp \
-	srcs/ScalerConverter.cpp
+	srcs/whatever.cpp
 
 OBJ = $(SRC:srcs/%.cpp=obj/%.o)
 
@@ -19,7 +19,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@$(CXX) $(CXXFLAGS) $(INCLUDES) $(OBJ) -o $(NAME)
 	@echo "$(GREEN)Executable created: $(NAME)$(RESET)"
-	@echo "$(GRAY)Usage: $(RESET)./$(NAME) <literal> "
+	@echo "$(GRAY)Usage: $(RESET)./$(NAME)"
 
 obj/%.o: srcs/%.cpp
 	@mkdir -p $(dir $@)

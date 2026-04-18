@@ -1,11 +1,11 @@
-NAME = base
+NAME = array
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 INCLUDES = -I include
 RM = rm -f
 
 SRC = srcs/main.cpp \
-	srcs/identify.cpp
+	srcs/Array.cpp
 
 OBJ = $(SRC:srcs/%.cpp=obj/%.o)
 
