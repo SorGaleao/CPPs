@@ -6,10 +6,8 @@ RM = rm -f
 
 SRC = src/main.cpp \
 	src/Bureaucrat.cpp \
-	src/AForm.cpp \
-	src/PresidentialPardonForm.cpp \
-	src/RobotomyRequestForm.cpp \
-	src/ShrubberyCreationForm.cpp
+	src/Form.cpp
+
 
 OBJ = $(SRC:src/%.cpp=obj/%.o)
 

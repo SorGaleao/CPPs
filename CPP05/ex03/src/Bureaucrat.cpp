@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:21:22 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/01/30 17:41:21 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/04/28 12:22:51 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,12 @@ void Bureaucrat::signForm(AForm& form) {
 		form.beSigned(*this);
 		std::cout << name << " signed " << form.getFormName() << std::endl;
 	}
+	catch (AForm::AlreadySigned &e) {
+		std::cout << name << " can't sign " << form.getFormName()
+				  << " because " << e.what() << std::endl;
+	}
 	catch (Bureaucrat::GradeTooLowException &e) {
-		std::cout << name << " couldn’t sign " << form.getFormName() << " because " << e.what() << std::endl;
+		std::cout << name << " couldn't sign " << form.getFormName() << " because " << e.what() << std::endl;
 	}
 }
 
@@ -67,7 +71,12 @@ void Bureaucrat::executeForm(AForm const & form) {
 		form.execute(*this);
 		std::cout << name << " executed " << form.getFormName() << std::endl;
 	}
+	catch (AForm::FormNotSigned &e) {
+		std::cerr << name << " can't execute " << form.getFormName()
+				  << " because " << e.what() << std::endl;
+	}
 	catch (Bureaucrat::GradeTooLowException &e) {
-    	std::cerr << e.what() << std::endl;
-	} 
+		std::cerr << name << " failed to execute " << form.getFormName();
+		std::cerr << " because " << e.what() << std::endl;
+	}
 }

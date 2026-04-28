@@ -6,74 +6,126 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 17:48:31 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/01/26 18:12:18 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/04/28 10:36:21 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Bureaucrat.hpp"
 
 int main() {
-	
-	std::cout << "1.--- Grade = 0 ---" << std::endl;
+	std::cout << "=== Test 1: Normal construction ===" << std::endl;
 	try {
-		Bureaucrat b("Keillin", 0);
-		std::cout << b << std::endl;
-	} catch (Bureaucrat::GradeTooHighException &e) {
-    	std::cerr << e.what() << std::endl;
-	} catch (Bureaucrat::GradeTooLowException &e) {
-    	std::cerr << e.what() << std::endl;
-	} 
+		Bureaucrat bob("Bob", 50);
+		std::cout << bob << std::endl;
+	}
+	catch (std::exception & e) {
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
 
-	std::cout << "\n2.--- Grade = -3 ---" << std::endl;
+	std::cout << std::endl << "=== Test 2: Grade too high (0) ===" << std::endl;
 	try {
-		Bureaucrat b("Sara", -3);
-		std::cout << b << std::endl;
-	} catch (Bureaucrat::GradeTooHighException &e) {
-    	std::cerr << e.what() << std::endl;
-	} catch (Bureaucrat::GradeTooLowException &e) {
-    	std::cerr << e.what() << std::endl;
-	} 
+		Bureaucrat invalid("Invalid", 0);
+		std::cout << invalid << std::endl;
+	}
+	catch (std::exception & e) {
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
 
-	std::cout << "\n3.--- Grade = 7 ---" << std::endl;
+	std::cout << std::endl << "=== Test 3: Grade too low (151) ===" << std::endl;
 	try {
-		Bureaucrat b("Ana", 7);
-		std::cout << b << std::endl;
-	} catch (Bureaucrat::GradeTooHighException &e) {
-    	std::cerr << e.what() << std::endl;
-	} catch (Bureaucrat::GradeTooLowException &e) {
-    	std::cerr << e.what() << std::endl;
-	} 
-	
-	std::cout << "\n4.--- Grade = 1-- ---" << std::endl;
+		Bureaucrat invalid("Invalid", 151);
+		std::cout << invalid << std::endl;
+	}
+	catch (std::exception & e) {
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::cout << std::endl << "=== Test 4: Increment ===" << std::endl;
 	try {
-		Bureaucrat b("Tania", 1);
-		b.gradeIncrementor();
-		std::cout << b << std::endl;
-	} catch (Bureaucrat::GradeTooHighException &e) {
-    	std::cerr << e.what() << std::endl;
-	} catch (Bureaucrat::GradeTooLowException &e) {
-    	std::cerr << e.what() << std::endl;
-	} 
-	
-	std::cout << "\n5.--- Grade = 150++ ---" << std::endl;
+		Bureaucrat alice("Alice", 5);
+		std::cout << alice << std::endl;
+		alice.gradeIncrementor();
+		std::cout << "After increment: " << alice << std::endl;
+		alice.gradeIncrementor();
+		std::cout << "After increment: " << alice << std::endl;
+	}
+	catch (std::exception & e) {
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::cout << std::endl << "=== Test 5: Decrement ===" << std::endl;
 	try {
-		Bureaucrat b("Galeao", 150);
-		b.gradeDecrementor();
-		std::cout << b << std::endl;
-	} catch (Bureaucrat::GradeTooHighException &e) {
-    	std::cerr << e.what() << std::endl;
-	} catch (Bureaucrat::GradeTooLowException &e) {
-    	std::cerr << e.what() << std::endl;
-	} 
-	
-	std::cout << "\n6.--- Grade = 159 ---" << std::endl;
+		Bureaucrat charlie("Charlie", 148);
+		std::cout << charlie << std::endl;
+		charlie.gradeDecrementor();
+		std::cout << "After decrement: " << charlie << std::endl;
+		charlie.gradeDecrementor();
+		std::cout << "After decrement: " << charlie << std::endl;
+	}
+	catch (std::exception & e) {
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::cout << std::endl << "=== Test 6: Increment at grade 1 (should throw) ===" << std::endl;
 	try {
-		Bureaucrat b("Galeao", 159);
-		b.gradeDecrementor();
-		std::cout << b << std::endl;
-	} catch (Bureaucrat::GradeTooHighException &e) {
-    	std::cerr << e.what() << std::endl;
-	} catch (Bureaucrat::GradeTooLowException &e) {
-    	std::cerr << e.what() << std::endl;
-	} return (0);
+		Bureaucrat top("Boss", 1);
+		std::cout << top << std::endl;
+		top.gradeIncrementor();
+		std::cout << "After increment: " << top << std::endl;
+	}
+	catch (std::exception & e) {
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::cout << std::endl << "=== Test 7: Decrement at grade 150 (should throw) ===" << std::endl;
+	try {
+		Bureaucrat bottom("Intern", 150);
+		std::cout << bottom << std::endl;
+		bottom.gradeDecrementor();
+		std::cout << "After decrement: " << bottom << std::endl;
+	}
+	catch (std::exception & e) {
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::cout << std::endl << "=== Test 8: Copy constructor ===" << std::endl;
+	try {
+		Bureaucrat original("Original", 42);
+		Bureaucrat copy(original);
+		std::cout << "Original: " << original << std::endl;
+		std::cout << "Copy: " << copy << std::endl;
+	}
+	catch (std::exception & e) {
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::cout << std::endl << "=== Test 9: Assignment operator ===" << std::endl;
+	try {
+		Bureaucrat a("PersonA", 10);
+		Bureaucrat b("PersonB", 100);
+		std::cout << "Before assignment:" << std::endl;
+		std::cout << "A: " << a << std::endl;
+		std::cout << "B: " << b << std::endl;
+		b = a;
+		std::cout << "After b = a:" << std::endl;
+		std::cout << "A: " << a << std::endl;
+		std::cout << "B: " << b << std::endl;
+		std::cout << "(Note: B keeps its name, only grade changes)" << std::endl;
+	}
+	catch (std::exception & e) {
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::cout << std::endl << "=== Test 10: Getters ===" << std::endl;
+	try {
+		Bureaucrat dave("Dave", 75);
+		std::cout << dave << std::endl;
+		std::cout << "Name: " << dave.getName() << std::endl;
+		std::cout << "Grade: " << dave.getGrade() << std::endl;
+	}
+	catch (std::exception & e) {
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	return 0;
 }

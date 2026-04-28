@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 11:59:54 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/01/30 17:58:34 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/04/28 12:20:03 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ public:
 	int getGradeToSign() const;
 	int getGradeToExec() const;
 	class FormNotSigned : public std::exception {
+		public:
+			const char* what() const throw();
+	};
+	class AlreadySigned : public std::exception {
 		public:
 			const char* what() const throw();
 	};

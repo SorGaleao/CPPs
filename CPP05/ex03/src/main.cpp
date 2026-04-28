@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 17:48:31 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/01/30 19:37:19 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/04/28 13:09:34 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,58 +15,72 @@
 #include "../include/RobotomyRequestForm.hpp"
 #include "../include/ShrubberyCreationForm.hpp"
 #include "../include/Intern.hpp"
+#include <cstdlib>
+#include <ctime>
 
 int main() {
-    std::cout << "\n--- Teste 1: Bureaucrat executando PresidentialPardonForm ---\n";
-    try {
-        Bureaucrat bob("Bob", 1);
-        PresidentialPardonForm form1("Arthur Dent");
-        bob.signForm(form1);
-        bob.executeForm(form1);
-    } catch (const std::exception& e) {
-        std::cout << "Erro inesperado: " << e.what() << std::endl;
-    }
+    std::srand(std::time(0));
+    Intern intern;
+    Bureaucrat alice("Alice", 1);
+    Bureaucrat bob("Bob", 50);
+    Bureaucrat charlie("Charlie", 146);
 
-    std::cout << "\n--- Teste 2: Bureaucrat com grade insuficiente ---\n";
-    try {
-        Bureaucrat joe("Joe", 150);
-        PresidentialPardonForm form2("Ford Prefect");
-        joe.signForm(form2); // Não deve conseguir assinar
-        joe.executeForm(form2); // Não deve conseguir executar
-    } catch (const std::exception& e) {
-        std::cout << "Erro inesperado: " << e.what() << std::endl;
-    }
-
-    std::cout << "\n--- Teste 3: Intern criando formulários ---\n";
-    try {
-        Bureaucrat bob("Bob", 1);
-        Intern intern;
-        AForm* f1 = intern.makeForm("robotomy request", "Marvin");
-        if (f1) {
-            bob.signForm(*f1);
-            bob.executeForm(*f1);
-            delete f1;
+    // Test ShrubberyCreationForm
+    std::cout << "\n=== Test: ShrubberyCreationForm via Intern ===\n";
+    AForm* shrub = intern.makeForm("shrubbery creation", "Ana");
+    if (shrub) {
+        try {
+            alice.signForm(*shrub);
+            alice.executeForm(*shrub);
+        } catch (std::exception &e) {
+            std::cout << e.what() << std::endl;
         }
-        AForm* f2 = intern.makeForm("shrubbery creation", "Jardim");
-        if (f2) {
-            bob.signForm(*f2);
-            bob.executeForm(*f2);
-            delete f2;
-        }
-        AForm* f3 = intern.makeForm("formulario desconhecido", "Alvo");
-        if (!f3)
-            std::cout << "Intern não conseguiu criar o formulário desconhecido.\n";
-    } catch (const std::exception& e) {
-        std::cout << "Erro inesperado: " << e.what() << std::endl;
+        delete shrub;
     }
 
-    std::cout << "\n--- Teste 4: Executar formulário não assinado ---\n";
-    try {
-        Bureaucrat bob("Bob", 1);
-        PresidentialPardonForm form3("Trillian");
-        bob.executeForm(form3);
-    } catch (const std::exception& e) {
-        std::cout << "Erro esperado: " << e.what() << std::endl;
+    // Test RobotomyRequestForm
+    std::cout << "\n=== Test: RobotomyRequestForm via Intern ===\n";
+    AForm* robot = intern.makeForm("robotomy request", "Tania");
+    if (robot) {
+        try {
+            bob.signForm(*robot);
+            bob.executeForm(*robot);
+        } catch (std::exception &e) {
+            std::cout << e.what() << std::endl;
+        }
+        delete robot;
     }
+
+    // Test PresidentialPardonForm
+    std::cout << "\n=== Test: PresidentialPardonForm via Intern ===\n";
+    AForm* pardon = intern.makeForm("presidential pardon", "Gab");
+    if (pardon) {
+        try {
+            alice.signForm(*pardon);
+            alice.executeForm(*pardon);
+        } catch (std::exception &e) {
+            std::cout << e.what() << std::endl;
+        }
+        delete pardon;
+    }
+
+    // Test with an invalid form name
+    std::cout << "\n=== Test: Invalid Form via Intern ===\n";
+    AForm* invalid = intern.makeForm("invalid form", "Nobody");
+    if (invalid) delete invalid;
+
+    // Test grade too low for signing/executing
+    std::cout << "\n=== Test: Grade Too Low ===\n";
+    AForm* shrub2 = intern.makeForm("shrubbery creation", "Kei");
+    if (shrub2) {
+        try {
+            charlie.signForm(*shrub2);
+            charlie.executeForm(*shrub2);
+        } catch (std::exception &e) {
+            std::cout << e.what() << std::endl;
+        }
+        delete shrub2;
+    }
+
     return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 12:01:06 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/01/30 17:05:29 by gabrsouz         ###   ########.fr       */
+/*   Updated: 2026/04/28 12:30:41 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ AForm::AForm(std::string const name,  int const gradeToSign, int const gradeToEx
 	isSigned = false;
 }
 
-AForm::AForm(const AForm& other) : name(other.name), isSigned(false), gradeToSign(other.gradeToSign), gradeToExec(other.gradeToExec) {}
+AForm::AForm(const AForm& other) : name(other.name), isSigned(other.isSigned), gradeToSign(other.gradeToSign), gradeToExec(other.gradeToExec) {}
 
 AForm& AForm::operator=(const AForm &other) {
 	if (this != &other) {
-		this->isSigned = false;
+		this->isSigned = other.isSigned;
 	}
 	return (*this);
 }
@@ -35,7 +35,11 @@ int AForm::getGradeToExec() const { return (gradeToExec); }
 
 const char* AForm::FormNotSigned::what() const throw() { return ("Form not signed"); }
 
+const char* AForm::AlreadySigned::what() const throw() { return ("Form already signed"); }
+
 void AForm::beSigned(const Bureaucrat& a) {
+	if (isSigned == true)
+		throw AForm::AlreadySigned();
 	if (a.getGrade() <= gradeToSign)
 		isSigned = true;
 	else
