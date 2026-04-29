@@ -1,19 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Array.cpp                                         :+:      :+:    :+:   */
+/*   Array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: automated <auto@local>                      +#+  +:+       +#+        */
+/*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/17 00:00:00 by automated         #+#    #+#             */
-/*   Updated: 2026/04/17 00:00:00 by automated        ###   ########.fr       */
+/*   Created: 2026/04/29 14:37:37 by gabrsouz          #+#    #+#             */
+/*   Updated: 2026/04/29 14:39:39 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Array.hpp"
-#include <string>
-#include <cstddef>
 #include <stdexcept>
+#include "Array.hpp"
 
 template <typename T>
 Array<T>::Array(): data(NULL), length(0) {}
@@ -72,7 +70,3 @@ const T& Array<T>::operator[](std::size_t idx) const {
 
 template <typename T>
 std::size_t Array<T>::size() const { return length; }
-
-// Explicit instantiations for types used in tests
-template class Array<int>;
-template class Array<std::string>;

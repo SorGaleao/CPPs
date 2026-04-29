@@ -34,4 +34,6 @@ public:
     std::size_t size() const;
 };
 
+#include "Array.tpp"
+
 #endif

@@ -1,6 +1,6 @@
 NAME = iter
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP
 INCLUDES = -I include
 RM = rm -f
 
@@ -36,3 +36,7 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+#include header dependencies
+
+-include $(OBJ:.o=.d)

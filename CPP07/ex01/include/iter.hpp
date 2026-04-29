@@ -18,7 +18,7 @@
 #include <cstddef>
 
 template <typename T, typename F>
-void iter(T *array, std::size_t size, F func) {
+void iter(T *array, std::size_t const size, F func) {
     if (!array)
         return;
     for (std::size_t i = 0; i < size; ++i)
@@ -26,7 +26,7 @@ void iter(T *array, std::size_t size, F func) {
 }
 
 template <typename T, typename F>
-void iter(T const *array, std::size_t size, F func) {
+void iter(T const *array, std::size_t const size, F func) {
     if (!array)
         return;
     for (std::size_t i = 0; i < size; ++i)

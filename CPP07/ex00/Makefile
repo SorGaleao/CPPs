@@ -1,11 +1,10 @@
 NAME = whatever
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP
 INCLUDES = -I include
 RM = rm -f
 
-SRC = srcs/main.cpp \
-	srcs/whatever.cpp
+SRC = srcs/main.cpp
 
 OBJ = $(SRC:srcs/%.cpp=obj/%.o)
 
@@ -37,3 +36,7 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+#include header dependencies
+
+-include $(OBJ:.o=.d)
