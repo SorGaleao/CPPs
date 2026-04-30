@@ -38,7 +38,8 @@ public:
 	template <typename It>
 	void addNumbers(It begin, It end) {
 		std::size_t dist = 0;
-		for (It it = begin; it != end; ++it) ++dist;
+		for (It it = begin; it != end; ++it) 
+			++dist;
 		if (data.size() + dist > capacity)
 			throw std::runtime_error("Not enough space to add range");
 		for (It it = begin; it != end; ++it)
