@@ -12,16 +12,15 @@
 
 #include "../include/Btc.hpp"
 
-void parse_input(std::string file) {
-	
-}
-
 int	main(int argc, char **argv) {
-    if (argc != 2) {
+	if (argc != 2) {
+		std::cerr << "Usage: " << argv[0] << " input_file" << std::endl;
 		return 1;
-		//throw an error here and the message
 	}
-	std::string file = argv[1];
-	parse_input(file);
+	
 	Btc btc("data.csv");
+	std::string file = argv[1];
+	if (!btc.parseDb() || !btc.parseInput(file))
+		return 1;
+	return 0;	
 }

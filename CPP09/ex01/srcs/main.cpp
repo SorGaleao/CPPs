@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Btc.hpp                                            :+:      :+:    :+:   */
+/*   main.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrsouz <gabrsouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/30 17:34:38 by gabrsouz          #+#    #+#             */
-/*   Updated: 2026/05/12 11:36:12 by gabrsouz         ###   ########.fr       */
+/*   Created: 2026/02/10 16:14:32 by gabrsouz          #+#    #+#             */
+/*   Updated: 2026/02/10 17:21:51 by gabrsouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BTC_H
-#define BTC_H
+#include "../include/RPN.hpp"
 
-#include <map>
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-
-class Btc {
-	private:
-		std::string fileName;
-		std::map <std::string, double> price;
-	
-	public:
-	Btc(std::string name);
-	Btc(const Btc& other);
-	Btc& operator=(const Btc& other);
-	~Btc();
-	bool parseDb();
-	bool parseInput(std::string input);
-};
-
-#endif
+int	main(int argc, char **argv) {
+	if (argc != 2) {
+		std::cerr << "Usage: " << argv[0] << "Inverted Polish mathematical expression" << std::endl;
+		return 1;
+	}
+	RPN rpnn;
+	if (!rpnn.rpn(argv[1]))
+		return 1;
+	return 0;	
+}

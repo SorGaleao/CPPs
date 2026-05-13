@@ -1,10 +1,11 @@
-NAME = iter
+NAME = RPN
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP
 INCLUDES = -I include
 RM = rm -f
 
-SRC = srcs/main.cpp
+SRC = srcs/main.cpp \
+	srcs/RPN.cpp
 
 OBJ = $(SRC:srcs/%.cpp=obj/%.o)
 
@@ -18,7 +19,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@$(CXX) $(CXXFLAGS) $(INCLUDES) $(OBJ) -o $(NAME)
 	@echo "$(GREEN)Executable created: $(NAME)$(RESET)"
-	@echo "$(GRAY)Usage: $(RESET)./$(NAME)"
+	@echo "$(GRAY)Usage example: $(RESET)./$(NAME) '1 1 +'"
 
 obj/%.o: srcs/%.cpp
 	@mkdir -p $(dir $@)
@@ -38,5 +39,4 @@ re: fclean all
 .PHONY: all clean fclean re
 
 #include header dependencies
-
 -include $(OBJ:.o=.d)

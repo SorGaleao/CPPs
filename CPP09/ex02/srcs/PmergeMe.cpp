@@ -62,8 +62,7 @@ int jacobsthal_ft(int n) {
     int a = 0; // J(0)
     int b = 1; // J(1)
     for (int i = 2; i <= n; ++i) {
-           if (a > (INT_MAX - b) / 2) return -1; // overflow would occur
-           int tmp = b + 2 * a;
+            int tmp = b + 2 * a;
         a = b;
         b = tmp;
     }
